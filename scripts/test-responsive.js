@@ -74,20 +74,21 @@ try {
       true,
     );
     const isPortraitPhone = width < 600 && height > width;
-    const rotateVisible = await evaluate(
-      `Boolean(document.getElementById('rotateOverlay') && window.getComputedStyle(document.getElementById('rotateOverlay')).display !== 'none')`,
-    );
+    const isRotated = await evaluate(`(() => {
+      const s = window.getComputedStyle(document.querySelector('.shell'));
+      return s.transform !== 'none';
+    })()`);
     if (isPortraitPhone) {
       assert.equal(
-        rotateVisible,
+        isRotated,
         true,
-        `Rotate overlay must be visible on portrait mobile (${width}x${height})`,
+        `Forced landscape rotation must be active on portrait mobile (${width}x${height})`,
       );
     } else if (width > height) {
       assert.equal(
-        rotateVisible,
+        isRotated,
         false,
-        `Rotate overlay must be hidden on landscape (${width}x${height})`,
+        `Forced landscape rotation must be inactive on landscape (${width}x${height})`,
       );
     }
     const layout = await evaluate(`(() => {

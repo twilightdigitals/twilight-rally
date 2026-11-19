@@ -7,7 +7,7 @@
     "pixelWidth": 488,
     "coreWidth": 11,
     "coreHeight": 11,
-    "renderMs": 46,
+    "renderMs": 68,
     "pausedTrail": 0
   },
   {
@@ -18,7 +18,7 @@
     "pixelWidth": 780,
     "coreWidth": 19,
     "coreHeight": 19,
-    "renderMs": 328,
+    "renderMs": 380,
     "pausedTrail": 0
   },
   {
@@ -29,7 +29,7 @@
     "pixelWidth": 780,
     "coreWidth": 19,
     "coreHeight": 19,
-    "renderMs": 357,
+    "renderMs": 356,
     "pausedTrail": 0
   },
   {
@@ -40,7 +40,7 @@
     "pixelWidth": 488,
     "coreWidth": 11,
     "coreHeight": 11,
-    "renderMs": 47,
+    "renderMs": 43,
     "pausedTrail": 0
   },
   {
@@ -51,7 +51,7 @@
     "pixelWidth": 780,
     "coreWidth": 19,
     "coreHeight": 19,
-    "renderMs": 79,
+    "renderMs": 65,
     "pausedTrail": 0
   },
   {
@@ -62,7 +62,7 @@
     "pixelWidth": 780,
     "coreWidth": 19,
     "coreHeight": 19,
-    "renderMs": 78,
+    "renderMs": 81,
     "pausedTrail": 0
   }
 ]

@@ -9,4 +9,3 @@
 - Preserve dynamic viewport sizing, safe areas, visible controls, keyboard scrolling fixes, focus handling and reduced-motion behavior.
 - QA snapshots must stay cloned, read-only and localhost-only; browser gameplay tests must not inject energy, scores or unlocked progress.
 - Report physical-device and online-feature limitations honestly. Do not describe simulated beatability as a universal human-win guarantee.
-- Follow the platform handoff specifications and delivery phases in docs/SHARED-GAMES-PLATFORM-BRIEF.md.

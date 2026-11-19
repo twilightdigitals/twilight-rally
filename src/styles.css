@@ -26,13 +26,29 @@ body {
   font-family: "DM Sans", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
-button,
-a {
+html {
   -webkit-tap-highlight-color: transparent;
 }
-button {
+button,
+a,
+canvas {
+  -webkit-tap-highlight-color: transparent;
+}
+button,
+[role="button"] {
   font: inherit;
   cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+button:active,
+.primary-button:active,
+.overlay-guide-link:active,
+.help-button:active,
+.icon-button:active {
+  transform: scale(0.97);
 }
 button:focus-visible,
 a:focus-visible,
@@ -1341,5 +1357,152 @@ select:focus-visible {
   .learning-tip {
     font-size: 10px;
     bottom: 3px;
+  }
+}
+
+/* Mobile landscape-only orientation blocker */
+.rotate-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: radial-gradient(
+    ellipse at 50% 38%,
+    #2a204e 0%,
+    #10132b 55%,
+    #070a16 95%
+  );
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: max(24px, env(safe-area-inset-top))
+    max(24px, env(safe-area-inset-right))
+    max(24px, env(safe-area-inset-bottom))
+    max(24px, env(safe-area-inset-left));
+}
+
+@media (max-width: 768px) and (orientation: portrait),
+       (max-device-width: 920px) and (orientation: portrait) and (pointer: coarse) {
+  .rotate-overlay {
+    display: flex;
+  }
+}
+
+@media (orientation: landscape) {
+  .rotate-overlay {
+    display: none !important;
+  }
+}
+
+.rotate-device-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  max-width: 320px;
+  margin: auto;
+}
+
+.rotate-device-icon {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 6px;
+  color: #bd95ff;
+}
+
+.rotate-device-icon .phone-svg {
+  animation: rotatePhoneAnim 2.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  transform-origin: center;
+}
+
+.rotate-arrow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  color: #9bf0e8;
+  opacity: 0.9;
+}
+
+@keyframes rotatePhoneAnim {
+  0%, 25% {
+    transform: rotate(0deg);
+  }
+  50%, 75% {
+    transform: rotate(-90deg);
+  }
+  95%, 100% {
+    transform: rotate(0deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rotate-device-icon .phone-svg {
+    animation: none;
+    transform: rotate(-90deg);
+  }
+}
+
+.rotate-device-card h2 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 26px;
+  line-height: 1.15;
+  margin: 0;
+  letter-spacing: -0.5px;
+  color: #ffffff;
+}
+
+.rotate-device-card h2 em {
+  font-style: normal;
+  color: #bd95ff;
+}
+
+.rotate-device-card p {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #c0bfd4;
+  margin: 0;
+}
+
+/* Enhanced landscape layout tuning for mobile phones */
+@media (max-height: 480px) and (orientation: landscape) {
+  .shell {
+    gap: 2px;
+    padding-top: max(2px, env(safe-area-inset-top));
+    padding-bottom: max(2px, env(safe-area-inset-bottom));
+    padding-left: max(14px, env(safe-area-inset-left));
+    padding-right: max(14px, env(safe-area-inset-right));
+  }
+  .topbar {
+    min-height: 44px;
+    gap: 6px;
+  }
+  .topbar-right {
+    gap: 4px;
+  }
+  .help-button {
+    padding: 6px 9px;
+    font-size: 11px;
+    min-height: 44px;
+  }
+  .game-header {
+    height: 36px;
+    padding: 0 8px;
+  }
+  .paddle-controls {
+    padding: 3px 12px;
+    gap: 8px;
+  }
+  .paddle-controls button {
+    min-width: 74px;
+    min-height: 44px;
+    font-size: 12px;
+  }
+  .paddle-controls button:active {
+    background: #4a3a66;
   }
 }

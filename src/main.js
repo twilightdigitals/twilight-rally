@@ -111,6 +111,9 @@ function clearPending() {
 
 function startGame() {
   if (!canPlay(state.level, state.playMode, local)) return;
+  if (screen.orientation?.lock) {
+    screen.orientation.lock("landscape").catch(() => {});
+  }
   clearPending();
   resetInput();
   state.time = 0;
@@ -372,6 +375,20 @@ document.addEventListener("visibilitychange", () => {
   )
     pause();
 });
+
+function onOrientationOrResize() {
+  const isPortraitMobile = window.matchMedia(
+    "(max-width: 768px) and (orientation: portrait)",
+  ).matches;
+  if (
+    isPortraitMobile &&
+    ["playing", "between", "countdown"].includes(state.phase)
+  ) {
+    pause();
+  }
+}
+window.addEventListener("resize", onOrientationOrResize);
+window.addEventListener("orientationchange", onOrientationOrResize);
 
 for (const button of document.querySelectorAll("[data-speed]")) {
   button.addEventListener("click", () => {

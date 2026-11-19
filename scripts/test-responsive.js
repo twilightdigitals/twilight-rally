@@ -73,6 +73,23 @@ try {
       await evaluate(`Boolean(document.querySelector('#startButton'))`),
       true,
     );
+    const isPortraitPhone = width < 600 && height > width;
+    const rotateVisible = await evaluate(
+      `Boolean(document.getElementById('rotateOverlay') && window.getComputedStyle(document.getElementById('rotateOverlay')).display !== 'none')`,
+    );
+    if (isPortraitPhone) {
+      assert.equal(
+        rotateVisible,
+        true,
+        `Rotate overlay must be visible on portrait mobile (${width}x${height})`,
+      );
+    } else if (width > height) {
+      assert.equal(
+        rotateVisible,
+        false,
+        `Rotate overlay must be hidden on landscape (${width}x${height})`,
+      );
+    }
     const layout = await evaluate(`(() => {
       const ids=['gameArea','gameCanvas','moveUp','moveDown','startButton','helpButton','settingsButton','statsButton','soundToggle','pauseButton','fireButton','levelsButton'];
       return {width:innerWidth,height:innerHeight,scrollWidth:document.documentElement.scrollWidth,scrollHeight:document.documentElement.scrollHeight,
@@ -190,8 +207,8 @@ try {
     `document.querySelector('[data-close="settingsDialog"]').click()`,
   );
   await send("Emulation.setDeviceMetricsOverride", {
-    width: 390,
-    height: 600,
+    width: 600,
+    height: 390,
     deviceScaleFactor: 1,
     mobile: true,
   });

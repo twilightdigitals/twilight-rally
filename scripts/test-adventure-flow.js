@@ -3,8 +3,8 @@ import fs from "node:fs/promises";
 import { base, send, evaluate, wait, socket } from "./browser-session.js";
 try {
   await send("Emulation.setDeviceMetricsOverride", {
-    width: 320,
-    height: 480,
+    width: 480,
+    height: 320,
     deviceScaleFactor: 1,
     mobile: true,
   });

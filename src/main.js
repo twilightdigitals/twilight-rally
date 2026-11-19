@@ -312,24 +312,11 @@ function animate(timestamp) {
 function updatePointer(event) {
   if (state.phase !== "playing") return;
   const rect = canvas.getBoundingClientRect();
-  const isRotated =
-    rect.width < rect.height ||
-    window.matchMedia(
-      "(max-width: 600px) and (orientation: portrait), (max-device-width: 920px) and (orientation: portrait) and (pointer: coarse)",
-    ).matches;
-  if (isRotated) {
-    state.pointerY = clamp(
-      ((rect.right - event.clientX) / rect.width) * FIELD.height,
-      0,
-      FIELD.height,
-    );
-  } else {
-    state.pointerY = clamp(
-      ((event.clientY - rect.top) / rect.height) * FIELD.height,
-      0,
-      FIELD.height,
-    );
-  }
+  state.pointerY = clamp(
+    ((event.clientY - rect.top) / rect.height) * FIELD.height,
+    0,
+    FIELD.height,
+  );
 }
 
 canvas.addEventListener("pointerdown", (event) => {
@@ -388,6 +375,20 @@ document.addEventListener("visibilitychange", () => {
   )
     pause();
 });
+
+function onOrientationOrResize() {
+  const isPortraitMobile = window.matchMedia(
+    "(max-width: 768px) and (orientation: portrait)",
+  ).matches;
+  if (
+    isPortraitMobile &&
+    ["playing", "between", "countdown"].includes(state.phase)
+  ) {
+    pause();
+  }
+}
+window.addEventListener("resize", onOrientationOrResize);
+window.addEventListener("orientationchange", onOrientationOrResize);
 
 for (const button of document.querySelectorAll("[data-speed]")) {
   button.addEventListener("click", () => {

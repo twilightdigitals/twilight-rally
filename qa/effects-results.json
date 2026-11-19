@@ -7,7 +7,7 @@
     "pixelWidth": 488,
     "coreWidth": 11,
     "coreHeight": 11,
-    "renderMs": 46,
+    "renderMs": 91,
     "pausedTrail": 0
   },
   {
@@ -16,9 +16,9 @@
     "trail": 12,
     "radius": 9,
     "pixelWidth": 780,
-    "coreWidth": 19,
-    "coreHeight": 19,
-    "renderMs": 328,
+    "coreWidth": 18,
+    "coreHeight": 17,
+    "renderMs": 1099,
     "pausedTrail": 0
   },
   {
@@ -27,9 +27,9 @@
     "trail": 22,
     "radius": 9,
     "pixelWidth": 780,
-    "coreWidth": 19,
-    "coreHeight": 19,
-    "renderMs": 357,
+    "coreWidth": 18,
+    "coreHeight": 17,
+    "renderMs": 1231,
     "pausedTrail": 0
   },
   {
@@ -40,7 +40,7 @@
     "pixelWidth": 488,
     "coreWidth": 11,
     "coreHeight": 11,
-    "renderMs": 47,
+    "renderMs": 67,
     "pausedTrail": 0
   },
   {
@@ -49,9 +49,9 @@
     "trail": 0,
     "radius": 9,
     "pixelWidth": 780,
-    "coreWidth": 19,
-    "coreHeight": 19,
-    "renderMs": 79,
+    "coreWidth": 18,
+    "coreHeight": 17,
+    "renderMs": 1161,
     "pausedTrail": 0
   },
   {
@@ -60,9 +60,9 @@
     "trail": 0,
     "radius": 9,
     "pixelWidth": 780,
-    "coreWidth": 19,
-    "coreHeight": 19,
-    "renderMs": 78,
+    "coreWidth": 18,
+    "coreHeight": 17,
+    "renderMs": 1023,
     "pausedTrail": 0
   }
 ]

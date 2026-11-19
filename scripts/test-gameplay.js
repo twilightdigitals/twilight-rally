@@ -137,8 +137,8 @@ try {
     120000,
   );
   await send("Emulation.setDeviceMetricsOverride", {
-    width: 844,
-    height: 390,
+    width: 390,
+    height: 844,
     deviceScaleFactor: 1,
     mobile: true,
   });

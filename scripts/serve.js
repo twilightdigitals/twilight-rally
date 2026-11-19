@@ -15,8 +15,6 @@ const mime = {
   ".json": "application/json; charset=utf-8",
 };
 
-const cache = new Map();
-
 http
   .createServer(async (request, response) => {
     try {
@@ -32,23 +30,17 @@ http
         response.writeHead(403).end("Forbidden");
         return;
       }
-      let contents = cache.get(filename);
-      if (!contents) {
-        const file = await stat(filename);
-        if (!file.isFile()) throw new Error("Not a file");
-        contents = await readFile(filename);
-        cache.set(filename, contents);
-      }
+      const file = await stat(filename);
+      if (!file.isFile()) throw new Error("Not a file");
+      const contents = await readFile(filename);
       response.writeHead(200, {
         "Content-Type":
           mime[path.extname(filename)] || "application/octet-stream",
-        "Content-Length": contents.length,
         "Cache-Control": "no-cache",
         "X-Content-Type-Options": "nosniff",
       });
       response.end(contents);
-    } catch (err) {
-      console.error("SERVE ERROR:", request.url, err.message);
+    } catch {
       response.writeHead(404).end("Not found");
     }
   })

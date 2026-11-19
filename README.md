@@ -111,6 +111,7 @@ Progress is stored under `twilight-rally-progress-v1` in the browser's localStor
 - `tests/`: regression tests and the bounded match simulator.
 - `scripts/`: local server, optional browser checks and Fire audio generator.
 - `qa/`: release evidence and reproducible test output.
+- `docs/SHARED-GAMES-PLATFORM-BRIEF.md`: Twilight Play shared games platform roadmap, release gates and backend delivery brief.
 
 ## Online limitations and deployment
 

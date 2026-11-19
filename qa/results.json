@@ -1,0 +1,131 @@
+{
+  "results": [
+    {
+      "width": 1920,
+      "height": 1080,
+      "arena": {
+        "id": "gameArea",
+        "x": 251,
+        "y": 109,
+        "w": 1418,
+        "h": 851
+      },
+      "passed": true
+    },
+    {
+      "width": 1366,
+      "height": 768,
+      "arena": {
+        "id": "gameArea",
+        "x": 11,
+        "y": 109,
+        "w": 1344,
+        "h": 539
+      },
+      "passed": true
+    },
+    {
+      "width": 1024,
+      "height": 600,
+      "arena": {
+        "id": "gameArea",
+        "x": 11,
+        "y": 109,
+        "w": 1002,
+        "h": 371
+      },
+      "passed": true
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "arena": {
+        "id": "gameArea",
+        "x": 11,
+        "y": 109,
+        "w": 746,
+        "h": 795
+      },
+      "passed": true
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "arena": {
+        "id": "gameArea",
+        "x": 11,
+        "y": 128,
+        "w": 368,
+        "h": 626
+      },
+      "passed": true
+    },
+    {
+      "width": 360,
+      "height": 640,
+      "arena": {
+        "id": "gameArea",
+        "x": 11,
+        "y": 128,
+        "w": 338,
+        "h": 422
+      },
+      "passed": true
+    },
+    {
+      "width": 320,
+      "height": 480,
+      "arena": {
+        "id": "gameArea",
+        "x": 11,
+        "y": 128,
+        "w": 298,
+        "h": 262
+      },
+      "passed": true
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "arena": {
+        "id": "gameArea",
+        "x": 11,
+        "y": 97,
+        "w": 822,
+        "h": 232
+      },
+      "passed": true
+    },
+    {
+      "width": 568,
+      "height": 320,
+      "arena": {
+        "id": "gameArea",
+        "x": 11,
+        "y": 97,
+        "w": 546,
+        "h": 162
+      },
+      "passed": true
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "arena": {
+        "id": "gameArea",
+        "x": 11,
+        "y": 128,
+        "w": 298,
+        "h": 350
+      },
+      "passed": true
+    }
+  ],
+  "audioFiles": 17,
+  "runtimeErrors": [],
+  "dynamicResize": true,
+  "keyboard": true,
+  "dialogs": true,
+  "touchPaddleMovement": true,
+  "focusContainmentAndRestoration": true
+}

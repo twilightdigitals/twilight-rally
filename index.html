@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#080c1b" />
+    <meta
+      name="description"
+      content="Twilight Rally: a free, instant-play, modern retro arcade game. Challenge the computer in your browser."
+    />
+    <title>Twilight Rally | Play the Arcade</title>
+    <link rel="icon" href="./public/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./src/styles.css" />
+    <script type="module" src="./src/main.js"></script>
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <a
+          class="brand"
+          href="https://twilight.ng"
+          aria-label="Twilight Digital Services home"
+        >
+          <span class="brand-mark" aria-hidden="true"
+            >T<span class="brand-star">✳</span></span
+          >
+          <span class="brand-text"
+            ><strong>TWILIGHT RALLY.</strong
+            ><span>OLD-SCHOOL SOUL. NEXT-LEVEL REFLEXES.</span></span
+          >
+        </a>
+        <div class="topbar-right">
+          <button
+            class="help-button"
+            id="levelsButton"
+            aria-haspopup="dialog"
+            aria-controls="levelsDialog"
+          >
+            Levels
+          </button>
+          <button
+            class="help-button"
+            id="helpButton"
+            type="button"
+            aria-haspopup="dialog"
+            aria-controls="howToPlayDialog"
+          >
+            Guide</button
+          ><button
+            class="help-button"
+            id="settingsButton"
+            aria-haspopup="dialog"
+            aria-controls="settingsDialog"
+          >
+            Settings</button
+          ><button
+            class="help-button"
+            id="statsButton"
+            aria-haspopup="dialog"
+            aria-controls="statsDialog"
+          >
+            Stats</button
+          ><button
+            class="icon-button"
+            id="soundToggle"
+            aria-label="Mute sound"
+            title="Toggle sound"
+          >
+            ♫
+          </button>
+        </div>
+      </header>
+
+      <main class="main">
+        <section class="game-frame" aria-label="Twilight Rally game">
+          <div class="game-header">
+            <div class="game-header-left">
+              <span class="live-indicator"></span><span>SOLO ARCADE</span
+              ><span class="mid-sep">/</span><span id="modeLabel">CLASSIC</span
+              ><span id="levelLabel" title="Level 1 · Progression"
+                >LEVEL 1</span
+              >
+            </div>
+            <div class="game-header-right">
+              <span class="key-hint">P / ESC = PAUSE</span
+              ><button id="pauseButton" class="small-action" disabled>
+                Ⅱ <span>Pause</span>
+              </button>
+            </div>
+          </div>
+          <div id="gameArea" class="game-area">
+            <canvas
+              id="gameCanvas"
+              width="960"
+              height="540"
+              aria-label="Two-dimensional ping-pong arena. Move your paddle with mouse, touch, W and S, or arrow keys."
+              tabindex="0"
+            ></canvas>
+            <aside id="learningTip" class="learning-tip" hidden>
+              <span id="learningText"></span
+              ><button id="dismissTip" aria-label="Dismiss learning tip">
+                ×
+              </button>
+            </aside>
+            <div class="hud" role="group" aria-label="Match score">
+              <div class="score-side">
+                <span class="score-name">YOU</span
+                ><strong id="scorePlayer">00</strong>
+              </div>
+              <div class="hud-center">
+                <span id="rallyCounter">RALLY 00</span
+                ><span class="tiny-label">FIRST TO 7 · WIN BY 2</span>
+              </div>
+              <div class="score-side right">
+                <span class="score-name">COMPUTER</span
+                ><strong id="scoreComputer">00</strong
+                ><span id="aiFireStatus" class="ai-fire-status">FIRE 0%</span>
+              </div>
+            </div>
+            <div class="overlay" id="menuOverlay">
+              <div class="overlay-content">
+                <div class="hero-badge">
+                  ✦ <span>THE ARCADE IS OPEN</span> ✦
+                </div>
+                <h2>ONE MORE<br /><em>ROUND?</em></h2>
+                <p>
+                  <span id="selectedSummary"
+                    >Level 1 · Beginner · Progression</span
+                  >
+                </p>
+                <button class="primary-button" id="startButton">
+                  PLAY LEVEL 1 <span aria-hidden="true">↗</span></button
+                ><button
+                  class="overlay-guide-link"
+                  id="menuHelpButton"
+                  type="button"
+                >
+                  How to Play?</button
+                ><span class="overlay-help"
+                  >No account. No download. Just play.</span
+                >
+              </div>
+            </div>
+            <div class="overlay hidden" id="pauseOverlay">
+              <div class="overlay-content">
+                <div class="hero-badge">TAKING A BREATHER?</div>
+                <h2>PAUSED<span class="period">.</span></h2>
+                <p>Your rally is right where you left it.</p>
+                <button class="primary-button" id="resumeButton">
+                  RESUME GAME <span aria-hidden="true">▶</span></button
+                ><span class="overlay-help"
+                  >5-second sound countdown before play resumes</span
+                >
+              </div>
+            </div>
+            <div
+              class="overlay hidden countdown-overlay"
+              id="countdownOverlay"
+              aria-live="off"
+            >
+              <div class="countdown-value" id="countdownValue">3</div>
+              <span class="countdown-caption">GET READY</span>
+            </div>
+            <div class="overlay hidden" id="resultOverlay">
+              <div class="overlay-content">
+                <div class="hero-badge" id="resultBadge">NICE GAME</div>
+                <h2 id="resultTitle">WELL PLAYED.</h2>
+                <p id="resultDescription">Ready to go again?</p>
+                <button class="overlay-guide-link" id="rematchButton">
+                  PLAY AGAIN <span aria-hidden="true">↗</span></button
+                ><button class="primary-button" id="nextLevelButton" hidden>
+                  NEXT LEVEL</button
+                ><button
+                  class="overlay-guide-link"
+                  id="moreOptionsButton"
+                  aria-haspopup="dialog"
+                  aria-controls="resultsOptionsDialog"
+                >
+                  More options
+                </button>
+              </div>
+            </div>
+            <div class="touch-guidance" id="touchGuidance" aria-hidden="true">
+              DRAG TO MOVE YOUR PADDLE
+            </div>
+          </div>
+          <div
+            class="paddle-controls"
+            role="group"
+            aria-label="Paddle controls"
+          >
+            <button id="moveUp" aria-label="Move paddle up">
+              ↑ <span>UP</span>
+            </button>
+            <div class="fire-control">
+              <meter
+                id="fireGauge"
+                min="0"
+                max="100"
+                value="0"
+                aria-label="Fire Gauge"
+              >
+                0%</meter
+              ><button id="fireButton" disabled aria-describedby="fireStatus">
+                FIRE · 0%</button
+              ><span id="fireStatus">Return shots to charge</span>
+            </div>
+            <button id="moveDown" aria-label="Move paddle down">
+              ↓ <span>DOWN</span>
+            </button>
+          </div>
+          <div class="game-footer">
+            <div class="footer-info">
+              <span class="controller-icon" aria-hidden="true">⌁</span
+              ><span class="desktop-instruction"
+                >MOVE <kbd>↑</kbd> <kbd>↓</kbd> OR <kbd>W</kbd> <kbd>S</kbd> ·
+                MOUSE</span
+              ><span class="mobile-instruction"
+                >DRAG ANYWHERE ON THE ARENA TO MOVE</span
+              >
+            </div>
+            <span id="performanceLabel">GRAPHICS: BALANCED</span>
+          </div>
+        </section>
+      </main>
+    </div>
+    <dialog
+      id="resultsOptionsDialog"
+      class="help-dialog"
+      aria-labelledby="resultsOptionsTitle"
+    >
+      <div class="help-dialog-head">
+        <h2 id="resultsOptionsTitle">Your next rally</h2>
+        <button
+          class="help-close"
+          data-close="resultsOptionsDialog"
+          aria-label="Close more options"
+        >
+          ×
+        </button>
+      </div>
+      <div class="result-options">
+        <button id="resultChooseLevel">Choose a level</button
+        ><button id="resultPractice">Practise this level</button
+        ><button id="resultSpeed">Adjust speed</button
+        ><button id="resultMenu">Back to menu</button>
+      </div>
+      <p>
+        Practice and replays do not earn first-clear Adventure points. Accounts,
+        cloud saves and online multiplayer are not available in this local
+        release.
+      </p>
+    </dialog>
+    <dialog id="levelsDialog" class="help-dialog" aria-labelledby="levelsTitle">
+      <div class="help-dialog-head">
+        <h2 id="levelsTitle">Choose your rally</h2>
+        <button
+          class="help-close"
+          data-close="levelsDialog"
+          aria-label="Close levels"
+        >
+          ×
+        </button>
+      </div>
+      <form id="levelForm">
+        <label for="playMode">Play mode</label
+        ><select id="playMode">
+          <option value="progression">Progression · unlocked levels</option>
+          <option value="practice">Practice · any level</option>
+        </select>
+        <p id="unlockDescription">Highest unlocked: 1</p>
+        <label for="levelInput">Starting level</label
+        ><input
+          id="levelInput"
+          type="text"
+          inputmode="numeric"
+          pattern="[1-9][0-9]*"
+          maxlength="1000"
+          value="1"
+          aria-describedby="levelHint levelError"
+          required
+        />
+        <p id="levelHint">
+          Levels 1–5 are beginner-friendly. Higher levels become more strategic,
+          with fixed reaction and movement limits.
+        </p>
+        <p id="levelError" role="alert"></p>
+        <p id="strategyDescription"></p>
+        <button class="help-done" type="submit">Play selected level</button>
+      </form>
+    </dialog>
+    <dialog
+      id="settingsDialog"
+      class="help-dialog"
+      aria-labelledby="settingsTitle"
+    >
+      <div class="help-dialog-head">
+        <h2 id="settingsTitle">Settings</h2>
+        <button
+          class="help-close"
+          data-close="settingsDialog"
+          aria-label="Close settings"
+        >
+          ×
+        </button>
+      </div>
+      <p>
+        Speed changes reset the match. Level controls AI skill independently.
+      </p>
+      <label class="checkbox-setting"
+        ><input type="checkbox" id="fireEnabled" checked /> Arcade Fireball
+        (both players)</label
+      >
+      <p class="help-note">
+        Turn off for pure rally. Changing this resets the match. Earn energy
+        with returns; tap Fire or press Space within 8 seconds, then return the
+        ball before the window closes.
+      </p>
+      <div class="settings-row">
+        <section class="settings-panel" aria-label="Game speed">
+          <div class="setting-heading">
+            <span class="setting-icon">◉</span>
+            <div>
+              <h3>GAME SPEED</h3>
+              <p>Set your pace.</p>
+            </div>
+          </div>
+          <div class="segmented" role="group" aria-label="Game speed">
+            <button class="segment" data-speed="chill">CHILL</button
+            ><button
+              class="segment active"
+              data-speed="classic"
+              aria-pressed="true"
+            >
+              CLASSIC</button
+            ><button class="segment" data-speed="turbo">TURBO</button>
+          </div>
+        </section>
+        <section class="settings-panel" aria-label="Graphics quality">
+          <div class="setting-heading">
+            <span class="setting-icon">✳</span>
+            <div>
+              <h3>VISUAL EFFECTS</h3>
+              <p>Built to run smooth.</p>
+            </div>
+          </div>
+          <div class="segmented" role="group" aria-label="Graphics quality">
+            <button class="segment" data-quality="lite">LITE</button
+            ><button
+              class="segment active"
+              data-quality="balanced"
+              aria-pressed="true"
+            >
+              BALANCED</button
+            ><button class="segment" data-quality="ultra">ULTRA</button>
+          </div>
+        </section>
+      </div>
+    </dialog>
+    <dialog id="statsDialog" class="help-dialog" aria-labelledby="statsTitle">
+      <div class="help-dialog-head">
+        <h2 id="statsTitle">Your corner</h2>
+        <button
+          class="help-close"
+          data-close="statsDialog"
+          aria-label="Close your corner"
+        >
+          ×
+        </button>
+      </div>
+      <section class="bottom-row" aria-label="Progress and upcoming features">
+        <div class="progress-card">
+          <div class="section-kicker">YOUR CORNER</div>
+          <div class="progress-title">
+            EVERY LEGEND STARTS <em>SOMEWHERE.</em>
+          </div>
+          <p>Master your angles. Win your first match. Come back stronger.</p>
+          <p>
+            Highest unlocked: <strong id="unlockedStat">1</strong> · Practice
+            matches: <strong id="practiceStat">0</strong>
+          </p>
+          <p>
+            Adventure points: <strong id="adventurePoints">0</strong> · Saved on
+            this browser
+          </p>
+          <div class="stat-row">
+            <div>
+              <strong id="totalWins">0</strong><span>PROGRESSION WINS</span>
+            </div>
+            <div>
+              <strong id="totalMatches">0</strong
+              ><span>PROGRESSION MATCHES</span>
+            </div>
+            <div><strong id="bestRally">0</strong><span>BEST RALLY</span></div>
+          </div>
+        </div>
+        <div class="soon-card">
+          <span class="coming-label">IN DEVELOPMENT</span>
+          <h3>BETTER<br />TOGETHER.</h3>
+          <p>
+            Challenge friends from anywhere, climb the global board and keep
+            your story going.
+          </p>
+          <span class="soon-link">PRIVATE MULTIPLAYER · LEADERBOARD</span>
+        </div>
+      </section>
+      <footer class="site-footer">
+        <span>© <span id="year"></span> TWILIGHT DIGITAL SERVICES</span
+        ><span>CRAFTED FOR THE LOVE OF PLAY</span
+        ><a href="https://twilight.ng" target="_blank" rel="noopener noreferrer"
+          >EXPLORE TWILIGHT ↗</a
+        >
+      </footer>
+    </dialog>
+    <dialog
+      id="howToPlayDialog"
+      class="help-dialog"
+      aria-labelledby="helpTitle"
+      aria-describedby="helpDescription"
+    >
+      <div class="help-dialog-head">
+        <div>
+          <span class="help-kicker">THE QUICK GUIDE</span>
+          <h2 id="helpTitle">How to Play</h2>
+        </div>
+        <button
+          type="button"
+          id="closeHelpButton"
+          class="help-close"
+          aria-label="Close instructions"
+        >
+          ×
+        </button>
+      </div>
+      <p id="helpDescription" class="help-lead">
+        Keep the ball in play. Outsmart the computer. Have fun.
+      </p>
+      <ol class="help-steps">
+        <li>
+          <strong>Move your paddle.</strong> Use your mouse or ↑ ↓ / W S keys.
+          On a phone, drag your finger across the arena.
+        </li>
+        <li>
+          <strong>Hit the ball back.</strong> Aim with your paddle and don't let
+          the ball pass you.
+        </li>
+        <li>
+          <strong>Score to win.</strong> Reach 7 points and lead by at least 2;
+          at 15 points, the leader wins.
+        </li>
+        <li>
+          <strong>Choose your pace and level.</strong> Levels controls AI
+          difficulty. Progression unlocks the next level when you win; practice
+          accepts any level without unlocking or progression wins. Chill is
+          relaxed, Classic is balanced, and Turbo is fast.
+        </li>
+        <li>
+          <strong>Take a break.</strong> Press Pause (or P / Escape) and choose
+          Resume for a 5-second countdown.
+        </li>
+        <li>
+          <strong>Earn Fireball.</strong> Return about five shots to charge. You
+          have 8 seconds to tap Fire or press Space, then make your next return
+          within that same window. The boosted shot has a short flame trail and
+          normal hitbox. The computer earns the same ability. Disable Arcade
+          Fireball in Settings for pure rally.
+        </li>
+      </ol>
+      <p class="help-note">
+        Tip: Start with Chill while learning. You can turn sounds on or off
+        using ♫.
+      </p>
+      <button type="button" id="gotItButton" class="help-done">Got it!</button>
+    </dialog>
+    <div class="sr-only" id="liveStatus" aria-live="polite"></div>
+  </body>
+</html>

@@ -1,0 +1,68 @@
+[
+  {
+    "quality": "lite",
+    "reduced": false,
+    "trail": 4,
+    "radius": 9,
+    "pixelWidth": 488,
+    "coreWidth": 11,
+    "coreHeight": 11,
+    "renderMs": 91,
+    "pausedTrail": 0
+  },
+  {
+    "quality": "balanced",
+    "reduced": false,
+    "trail": 12,
+    "radius": 9,
+    "pixelWidth": 780,
+    "coreWidth": 18,
+    "coreHeight": 17,
+    "renderMs": 1099,
+    "pausedTrail": 0
+  },
+  {
+    "quality": "ultra",
+    "reduced": false,
+    "trail": 22,
+    "radius": 9,
+    "pixelWidth": 780,
+    "coreWidth": 18,
+    "coreHeight": 17,
+    "renderMs": 1231,
+    "pausedTrail": 0
+  },
+  {
+    "quality": "lite",
+    "reduced": true,
+    "trail": 0,
+    "radius": 9,
+    "pixelWidth": 488,
+    "coreWidth": 11,
+    "coreHeight": 11,
+    "renderMs": 67,
+    "pausedTrail": 0
+  },
+  {
+    "quality": "balanced",
+    "reduced": true,
+    "trail": 0,
+    "radius": 9,
+    "pixelWidth": 780,
+    "coreWidth": 18,
+    "coreHeight": 17,
+    "renderMs": 1161,
+    "pausedTrail": 0
+  },
+  {
+    "quality": "ultra",
+    "reduced": true,
+    "trail": 0,
+    "radius": 9,
+    "pixelWidth": 780,
+    "coreWidth": 18,
+    "coreHeight": 17,
+    "renderMs": 1023,
+    "pausedTrail": 0
+  }
+]

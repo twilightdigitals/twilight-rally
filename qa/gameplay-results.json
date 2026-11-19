@@ -1,0 +1,15 @@
+{
+  "earnedFireHits": 10,
+  "spaceLaunch": true,
+  "tapLaunch": true,
+  "practiceUnlocked": "1",
+  "progressionScore": {
+    "player": 7,
+    "computer": 0
+  },
+  "unlocked": "2",
+  "decodedSounds": 13,
+  "largeLevelExact": true,
+  "levelEightRally": 8,
+  "runtimeErrors": []
+}

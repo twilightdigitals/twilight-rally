@@ -1,0 +1,92 @@
+[
+  {
+    "level": "1",
+    "speed": "chill",
+    "routine": 1,
+    "angled": 0.24
+  },
+  {
+    "level": "1",
+    "speed": "classic",
+    "routine": 1,
+    "angled": 0.27
+  },
+  {
+    "level": "1",
+    "speed": "turbo",
+    "routine": 0.97,
+    "angled": 0.15
+  },
+  {
+    "level": "5",
+    "speed": "chill",
+    "routine": 1,
+    "angled": 0.05
+  },
+  {
+    "level": "5",
+    "speed": "classic",
+    "routine": 1,
+    "angled": 0.28
+  },
+  {
+    "level": "5",
+    "speed": "turbo",
+    "routine": 1,
+    "angled": 0.14
+  },
+  {
+    "level": "8",
+    "speed": "chill",
+    "routine": 1,
+    "angled": 0.11
+  },
+  {
+    "level": "8",
+    "speed": "classic",
+    "routine": 1,
+    "angled": 0.25
+  },
+  {
+    "level": "8",
+    "speed": "turbo",
+    "routine": 1,
+    "angled": 0.2
+  },
+  {
+    "level": "15",
+    "speed": "chill",
+    "routine": 1,
+    "angled": 0.31
+  },
+  {
+    "level": "15",
+    "speed": "classic",
+    "routine": 1,
+    "angled": 0.14
+  },
+  {
+    "level": "15",
+    "speed": "turbo",
+    "routine": 1,
+    "angled": 0.24
+  },
+  {
+    "level": "60",
+    "speed": "chill",
+    "routine": 1,
+    "angled": 1
+  },
+  {
+    "level": "60",
+    "speed": "classic",
+    "routine": 1,
+    "angled": 1
+  },
+  {
+    "level": "60",
+    "speed": "turbo",
+    "routine": 1,
+    "angled": 0.33
+  }
+]
